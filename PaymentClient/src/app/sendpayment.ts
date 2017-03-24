@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 export abstract class PaymentLogic {
 
 	abstract Create(Pay: Req): Observable<Res>;	
-
+	abstract SalaryCreate(Pay : Req) : Observable<Res>;
 }
 
 @Injectable()
@@ -25,6 +25,17 @@ export class CreatePaymentLogic extends PaymentLogic {
 
 	Create(Pay: Req): Observable<Res> {
         let url = "http://localhost:63977/api/DKPayment";
+		let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+		let options = new RequestOptions({ headers: headers }); // Create a request option
+		return this._http
+			.post(url, Pay, options)
+			.map((response: Response) => <Res>response.json())
+			.do(data => console.log('All : ' + JSON.stringify(data)))
+			.catch(this.handleError);
+	}
+
+	SalaryCreate(Pay: Req): Observable<Res> {
+        let url = "http://localhost:63977/api/SalaryPayment";
 		let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 		let options = new RequestOptions({ headers: headers }); // Create a request option
 		return this._http

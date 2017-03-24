@@ -20,16 +20,25 @@ export class PaymentFormComponent {
 	}
 	
 	CreateP(uid: string, agrno: string, faccount: string, taccount: string, amount: string, ptype: string): void {
-
-		let d: Req = new Req(uid, agrno, faccount, taccount, amount, ptype);
-		this.PayLogic.Create(d).subscribe((r) => {
-			this.out = r;
-            this.result = this.out.Returtekst;
-            this.Show = true;
-			console.log(this.result); 
-		}, error => this.error = <any>error);
-
-		
+		if(ptype == "BKT") {
+			let d: Req = new Req(uid, agrno, faccount, taccount, amount, ptype);
+			this.PayLogic.Create(d).subscribe((r) => {
+				this.out = r;
+				this.result = this.out.Returtekst;
+				this.Show = true;
+				console.log(this.result); 
+			}, error => this.error = <any>error);
+		}
+		else if(ptype == "BKL")
+		{
+			let d: Req = new Req(uid, agrno, faccount, taccount, amount, ptype);
+			this.PayLogic.SalaryCreate(d).subscribe((r) => {
+				this.out = r;
+				this.result = this.out.Returtekst;
+				this.Show = true;
+				console.log(this.result); 
+			}, error => this.error = <any>error);
+		}
 	}
 	CreateMore(): void {
 		this.Show = false;

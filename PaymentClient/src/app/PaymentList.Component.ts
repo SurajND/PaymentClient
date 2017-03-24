@@ -34,6 +34,7 @@ export class PaymentListComponent {
         //fdate = first + second + third;
         //const [first1, second1, third1] = tdate.toString().split("-");
         //tdate = first1 + second1 + third1;
+        console.log(fdate);
         this.Alert = false;
         let r: ListPaymentRequest = 
         new ListPaymentRequest('000000000000000000000000',
@@ -89,7 +90,7 @@ export class PaymentListComponent {
         return s;
     }
 
-    Approve() {
+    Approve(fdate: string, tdate: string) {
         //this.Alert = true;
         let i : number = 0;
         let req : ApproveRequesst = new ApproveRequesst();
@@ -114,25 +115,22 @@ export class PaymentListComponent {
                 let pr : PaymentRow = new PaymentRow();
                 pr.RFNRAR = pay.txhRfnrar.substr(3,10);
                 pr.AntalDec = 2;                
-                pr.BELOEB = this.pad(pay.txoAmount.replace(",",""),15);
-                pr.BELOEB = "000000000000" + pay.txoAmount.replace(",","");
+                pr.BELOEB = this.pad(pay.txoAmount.replace(",",""),15);                
+                //pr.BELOEB = "000000000000" + pay.txoAmount.replace(",","");
                 pr.BTTY = pay.paymentTypeValue.replace(" ","");
                 pr.LAESTIMESTAMP = pay.txhOprettid;
                 pr.TILIDENT = pay.txoTilKto.replace(" ","").trim();
                 pr.VALUTAKODE = pay.txoCurrency;
-                //console.log(pr);
                 req.payments.paymentRow.push(pr);
                 i = i + 1;
             }
         });
-        //console.log(this.aprPay);
-        //req.payments.paymentRow = this.aprPay;
+
         console.log(req);
         this.appPay.Approve(req)
         .subscribe(can => {      
          console.log(this.res);
         },error => this.error = <any>error);
-
 
         //start
         let r: ListPaymentRequest = 
@@ -148,8 +146,8 @@ export class PaymentListComponent {
             '7DAG',
             'Q',
             'MANGLG    ',
-            '20170313',
-            '20170313',
+            fdate,
+            tdate,
             ' ',
             ' ',
             '00000000000000',

@@ -13,10 +13,10 @@
         <input type="text" style="padding-left:2px" name="agreementnumber" value="0F2714" #a />
 
         <label for="fradat">From Date</label>
-        <input type="date" style="padding-left:2px" name="fromdate" value="20170313" #f>
+        <input type="date" style="padding-left:2px" name="fromdate" value="20170324" #f>
 
         <label for="tildat">To Date</label>
-        <input type="date" style="padding-left:2px" name="todate" value="20170313" #t>
+        <input type="date" style="padding-left:2px" name="todate" value="20170324" #t>
         
         <select id="type" style="padding-left:2px" name="paymenttype" value="" #p>
             <option selected disabled>Choose a payment type...</option>
@@ -73,5 +73,5 @@
             
         </tr>
     </table>
-    <input type="button" value="Authorise" style="width:10%" (click)="Approve()">
+    <input type="button" value="Authorise" style="width:10%" (click)="Approve(f.value,t.value)">
 </div>
