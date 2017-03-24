@@ -1,0 +1,88 @@
+h1 {
+  color: #369;
+  font-family: 'Danske Text', 'Danske Headline', DanskeSerif;
+  font-size: 250%;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=button] {
+    width: 100%;
+    background-color: #1874CD;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: #b3c6ff;
+}
+
+div {
+    font-family:Danske Human;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+#labebl {
+}
+.label:before{
+     content:"*" ;
+     color:red   
+     }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #1874CD;
+    color: white;
+}
+a {
+    line-height: .1em;
+    display: inline-block;
+    text-decoration: none;
+    padding: 20px;
+    margin: 10px;
+    font-family:'Danske Text';
+    font-size:20px;
+}
+.alert {
+    padding: 20px;
+    background-color: #1874CD;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}

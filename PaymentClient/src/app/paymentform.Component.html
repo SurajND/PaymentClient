@@ -1,0 +1,35 @@
+﻿<div *ngIf ="!Show">
+    <h1>Create Payment</h1>
+    <form>
+        <label for="brgnr">User ID</label>
+        <input type="text" style="padding-left:2px" name="UserId" value="5G7283" #u/>
+
+        <label for="brgnr">Agreement Number</label>
+        <input type="text" style="padding-left:2px" name="agreementnumber" value="0F2714" #a/>
+
+        <label for="fromacount">From Account</label>
+        <input type="text" style="padding-left:2px" name="fromaccount" value="3361632362" #f/>
+
+        <label for="toaccount">To Account</label>
+        <input type="text" style="padding-left:2px" name="toaccount" value="3258186214" #t/>
+
+        <label for="amount">Amount</label>
+        <input type="text" style="padding-left:2px" name="amount" value="" #b/>
+
+        <label for="type">Payment Type</label>
+
+        <select id="type" style="padding-left:2px" name="paymenttype" value="" #p>
+            <option selected disabled>Choose a payment type...</option>
+            <option value="BKT">Internal Account transfer</option>           
+        </select>
+        
+
+        <input type="button" value="Create Payment" (click)="CreateP(u.value,a.value,f.value,t.value,b.value,p.value)">
+    </form>
+</div>
+<div *ngIf="Show">
+    <form>
+        <label id="response">{{result}}</label>
+        <input type="button" value="Create Another Payment" (click)="CreateMore()">
+    </form>
+</div>

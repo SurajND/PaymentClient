@@ -1,0 +1,77 @@
+﻿<div></div>
+<div class="alert" *ngIf="Alert" style="margin-left:25%;margin-right:25%" >
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Info!</strong> This functionality in under progress
+</div>
+<div>
+    <h1>Payment List</h1>
+    <form>
+        <label for="brgnr">User ID</label>
+        <input type="text" style="padding-left:2px" name="UserId" value="5G7283" #u />
+
+        <label for="aftlnr">Agreement Number</label>
+        <input type="text" style="padding-left:2px" name="agreementnumber" value="0F2714" #a />
+
+        <label for="fradat">From Date</label>
+        <input type="date" style="padding-left:2px" name="fromdate" value="20170313" #f>
+
+        <label for="tildat">To Date</label>
+        <input type="date" style="padding-left:2px" name="todate" value="20170313" #t>
+        
+        <select id="type" style="padding-left:2px" name="paymenttype" value="" #p>
+            <option selected disabled>Choose a payment type...</option>
+            <option value="ALL">ALL</option>
+        </select>
+
+
+        <input type="button" value="List Payment" (click)="ListP(u.value,a.value,p.value,f.value,t.value)">
+    </form>
+</div>
+<div *ngIf="Show">
+    <table border="1">
+
+        <tr selecttable="blue" style="cursor:pointer">
+            <th> </th>
+            <th> Amount </th>
+            <th> Currency </th>
+            <th> Date </th>
+            <th> Debitor Account Name </th>
+            <th> Creditor Name </th>
+            <th> To Account </th>
+            <th> Reference Number </th>
+            <th> Status </th>
+
+        </tr>
+        <tr *ngFor="let x of paymentresult"  style="cursor:pointer">
+            <td>
+                <input #{{x.txhRfnrar}} type="checkbox" [(ngModel)]="x.selected" name="your-group" value="unit-in-group" />
+            </td>
+            <td>
+                {{x.txoAmount}}
+            </td>
+            <td>
+                {{x.txoCurrency}}
+            </td>
+            <td>
+                {{x.txoEkspDt}}
+            </td>
+            <td>
+                {{x.txoAfsKto}}
+            </td>
+            <td>
+                {{x.txoTilNvn}}
+            </td>
+            <td>
+                {{x.txoTilKto}}
+            </td>
+            <td>
+                {{x.txhRfnrar}}
+            </td>            
+            <td>
+                {{x.txoBTST}}
+            </td>
+            
+        </tr>
+    </table>
+    <input type="button" value="Authorise" style="width:10%" (click)="Approve()">
+</div>
