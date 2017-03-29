@@ -43,5 +43,17 @@ export class SalaryPayment {
         public checkGemBtty : string,
         public ChkModtGem : string,
         public FoldetUd : string,
-        public BeneficiaryType : string){ }
+        public BeneficiaryType : string,
+        public IB_KORTART : string,
+        public IB_IK_IDENT : string,
+        public IB_KREDITORNR : string,
+        public IB_ALT_AFS_NAVN : string,
+        public IB_ALT_AFS_ADRESSE : string,
+        public IB_ALT_AFS_POSTNR : string,
+        public IB_ALT_AFS_BYNAVN : string,
+        public IB_ALT_AFS_LANDEKODE : string,
+        public IB_MODTAG_ADVIS_TEKST : string,
+        public KREDITORNR : string,
+        public RFNRAR : string
+        ){ }
 }

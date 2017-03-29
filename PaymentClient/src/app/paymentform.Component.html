@@ -10,8 +10,8 @@
         <label for="fromacount">From Account</label>
         <input type="text" style="padding-left:2px" name="fromaccount" value="3361632362" #f/>
 
-        <label for="toaccount">To Account</label>
-        <input type="text" style="padding-left:2px" name="toaccount" value="3258186214" #t/>
+        <label *ngIf="!code" for="toaccount">To Account</label>
+        <input *ngIf="!code" type="text" style="padding-left:2px" name="toaccount" value="3258186214" [(ngModel)]="pay.toaccount"/>
 
         <label for="amount">Amount</label>
         <input type="text" style="padding-left:2px" name="amount" value="" #b/>
@@ -20,22 +20,38 @@
 
         <select (change)="BenType(p.value)" id="type" style="padding-left:2px" name="paymenttype" value="" #p>
             <option selected disabled>Choose a payment type...</option>
+            <option value="BIK">Inpayment form</option>     
             <option value="BKT">Internal Account transfer</option>     
             <option value="BKT">External Account transfer</option>   
             <option value="BKL">Salary</option>   
         </select>
-        
-        <select id="type" style="padding-left:2px" name="beneficiarytype" value="" #bt>
-            <option selected disabled>Choose beneficiary type...</option>
-            <option value="ACC">Account number</option>
-            <option value="NKC">CPR number</option>
-            <option value="NKV">CVR number</option>
-            <option value="NKP">Production unit no.</option>
-            <option value="NKR">CVR with SE number</option>
-            <option value="NKS">SE number</option>
-        </select>
-
-        <input type="button" value="Create Payment" (click)="CreateP(u.value,a.value,f.value,t.value,b.value,p.value,bt.value)">
+        <div *ngIf="benDd">
+            <select id="type" style="padding-left:2px" name="beneficiarytype" value="" [(ngModel)]="pay.btype">
+                <option selected disabled>Choose beneficiary type...</option>
+                <option value="ACC">Account number</option>
+                <option value="NKC">CPR number</option>
+                <option value="NKV">CVR number</option>
+                <option value="NKP">Production unit no.</option>
+                <option value="NKR">CVR with SE number</option>
+                <option value="NKS">SE number</option>
+            </select>
+        </div>
+        <div *ngIf="code">
+            <label for="codeline">Code line</label>
+            <select id="type" style="padding-left:2px" name="kortart" value="" [(ngModel)]="pay.kortart">                
+                <option value="01">+01</option>
+                <option value="04">+04</option>
+                <option value="15">+15</option>
+                <option value="41">+41</option>
+                <option value="71">+71</option>
+                <option value="73">+73</option>
+                <option value="75">+75</option>
+            </select>
+            <input type="text" style="padding-left:2px" placeholder="Payment ID" name="ikdent" value="" [(ngModel)]="pay.ikdent"/>
+            <input type="text" style="padding-left:2px" placeholder="Creditor or giro account number" name="ibkreditor" value="" [(ngModel)]="pay.ibkreditor"/>
+            <input type="text" style="padding-left:2px" placeholder="Message to beneficiary" name="modtagtext" value="" [(ngModel)]="pay.modtagtext"/>
+        </div>    
+        <input type="button" value="Create Payment" (click)="CreateP(u.value,a.value,f.value,b.value,p.value)">
     </form>
 </div>
 <div *ngIf="Show">
