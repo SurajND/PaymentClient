@@ -18,7 +18,7 @@
 
         <label for="type">Payment Type</label>
 
-        <select id="type" style="padding-left:2px" name="paymenttype" value="" #p>
+        <select (change)="BenType(p.value)" id="type" style="padding-left:2px" name="paymenttype" value="" #p>
             <option selected disabled>Choose a payment type...</option>
             <option value="BKT">Internal Account transfer</option>     
             <option value="BKT">External Account transfer</option>   

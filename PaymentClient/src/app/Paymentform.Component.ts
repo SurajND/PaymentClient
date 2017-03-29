@@ -16,6 +16,8 @@ export class PaymentFormComponent {
 	result: string;
 	error: string;
 	Show: boolean = false;
+	benDd:boolean = false;
+
 	constructor(private PayLogic: PaymentLogic) {
 
 	}
@@ -26,30 +28,37 @@ export class PaymentFormComponent {
         return s;
     }
 	
-	CreateP(uid: string, agrno: string, faccount: string, taccount: string, amount: string, ptype: string, btype: string): void {
-		if(ptype == "BKT") {
-			let d: Req = new Req(uid,agrno,faccount,taccount,amount,ptype,btype);			
-			this.PayLogic.Create(d).subscribe((r) => {
-				this.out = r;
-				this.result = this.out.Returtekst;
-				this.Show = true;
-				console.log(this.result); 
-			}, error => this.error = <any>error);
-		}
-		else if(ptype == "BKL")
-		{
-			let d: SalaryPayment = new SalaryPayment('',agrno, uid, 'DA','DK' ,'E','DK','DK',
-			'3923','','0', faccount, '0','','', '','','','','','0000', faccount,'',taccount,'', this.pad(amount.replace(",",""),15), 'DKK','','0','DABA', 'O23YVQD5IKDJK26L3443FJO5', ptype,
-			'0','0','0','0','1','0','0','Salary','0','0','0','0');
+	CreateP(uid: string, agrno: string, faccount: string, taccount: string, amount: string, ptype: string, btype: string): void {		
+			let btty : string;
+			if (ptype == "BKL"){
+				btty = "Salary";
+				btype = "";				
+			}
+			else{
+				btty = "Account transfer";
+			}			
+			let d: SalaryPayment = new SalaryPayment('',agrno, uid, 'DA','DK' ,'E','DK','DA',
+			'3923','','0', faccount, '0','','', '','','','','','0000', faccount,'',taccount,'',
+			this.pad(amount.replace(",",""),15), 'DKK','','0','DABA', 'O23YVQD5IKDJK26L3443FJO5',
+			ptype,'0','0','0','0','1','0','0',btty,'0','0','0','0',btype);
 			this.PayLogic.SalaryCreate(d).subscribe((r) => {
 				this.out = r;
 				this.result = this.out.Returtekst;
 				this.Show = true;
 				console.log(this.result); 
-			}, error => this.error = <any>error);
-		}
+			}, error => this.error = <any>error);		
 	}
+
 	CreateMore(): void {
 		this.Show = false;
+	}
+
+	BenType(ptype : string):void{
+		if (ptype == 'BKT'){
+			this.benDd = true;
+		}
+		else{
+			this.benDd = false;
+		}
 	}
 }

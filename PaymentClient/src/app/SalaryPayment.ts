@@ -42,5 +42,6 @@ export class SalaryPayment {
         public checkGemMappe : string,
         public checkGemBtty : string,
         public ChkModtGem : string,
-        public FoldetUd : string){ }
+        public FoldetUd : string,
+        public BeneficiaryType : string){ }
 }

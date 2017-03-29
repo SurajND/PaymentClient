@@ -26,7 +26,7 @@ export class CreatePaymentLogic extends PaymentLogic {
 	}
 
 	Create(Pay: Req): Observable<Res> {
-        let url = "http://localhost:63977/api/AccountPaymentService";
+        let url = "http://localhost:63977/api/AccountTransferService";
 		let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 		let options = new RequestOptions({ headers: headers }); // Create a request option
 		return this._http
@@ -34,19 +34,10 @@ export class CreatePaymentLogic extends PaymentLogic {
 			.map((response: Response) => <Res>response.json())
 			.do(data => console.log('All : ' + JSON.stringify(data)))
 			.catch(this.handleError);
-	}
-
-	beneficiary(ptype : string) : void{
-		if(ptype = 'BKT'){
-			this.beneficiaryDd = true;
-		}
-		else{
-			this.beneficiaryDd = false;
-		}
-	} 
+	}	
 
 	SalaryCreate(Pay: SalaryPayment): Observable<Res> {
-        let url = "http://localhost:63977/api/SalaryService";
+        let url = "http://localhost:63977/api/AccountTransfer";
 		let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 		let options = new RequestOptions({ headers: headers }); // Create a request option
 		return this._http
