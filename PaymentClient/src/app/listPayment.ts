@@ -30,7 +30,7 @@ export class ListLogic extends ListPaymentLogic {
     }
 
     List(Req: ListPaymentRequest): Observable<ListPaymentResponse> {
-        let url = "http://localhost:50608/api/DKPayment";
+        let url = "http://localhost:50608/api/ListPayment";
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
         return this._http

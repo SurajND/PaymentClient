@@ -24,7 +24,7 @@ export class ApprovePayLogic extends ApprovePayment {
 	}
 
 	Approve(Pay: ApproveRequesst): Observable<ApproveResponse> {
-        let url = "http://localhost:50608/api/Approve";
+        let url = "http://localhost:50608/api/ApprovePayment";
 		let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 		let options = new RequestOptions({ headers: headers }); // Create a request option
 		return this._http
