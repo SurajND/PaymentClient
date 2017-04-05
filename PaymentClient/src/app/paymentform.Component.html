@@ -52,6 +52,7 @@
             <input type="text" style="padding-left:2px" placeholder="Message to beneficiary" name="modtagtext" value="" [(ngModel)]="pay.modtagtext"/>
         </div>    
         <input type="button" value="Create Payment" (click)="CreateP(u.value,a.value,f.value,b.value,p.value)">
+        <input type="button" value="Pop Up" (click)="Distrue()">
     </form>
 </div>
 <div *ngIf="Show">
@@ -59,4 +60,14 @@
         <label id="response">{{result}}</label>
         <input type="button" value="Create Another Payment" (click)="CreateMore()">
     </form>
+</div>
+<!-- The Modal -->
+<div *ngIf="dis" id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="Disfalse()">&times;</span>
+    <label for="type">Enter the amount</label>
+    <input type="text" style="padding-left:2px" name="amountTransfer" value="" #amo/>
+    <input type="button" value="Transfer" (click)="Disfalse()">
+  </div>
 </div>

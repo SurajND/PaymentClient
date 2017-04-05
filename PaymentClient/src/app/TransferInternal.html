@@ -1,0 +1,16 @@
+<div *ngIf ="!Show">
+    <h1>Account List</h1>
+    <form>        
+        <input type="button" value="Pop Up" (click)="Distrue()">
+    </form>
+</div>
+<!-- The Modal -->
+<div *ngIf="dis" id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="Disfalse()">&times;</span>
+    <label for="type">Enter the amount</label>
+    <input type="text" style="padding-left:2px" name="amountTransfer" value="" #amo/>
+    <input type="button" value="Transfer" (click)="Disfalse()">
+  </div>
+</div>

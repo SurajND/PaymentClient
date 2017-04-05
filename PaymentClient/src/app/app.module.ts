@@ -13,14 +13,16 @@ import { ListPaymentResponse, Payments } from './listresponse';
 import { ListLogic, ListPaymentLogic } from './listpayment';
 import { ListPaymentRequest } from './listrequest';
 import { ApprovePayLogic, ApprovePayment} from './Approve.service';
+import { TransferInternal } from './TransferInternal';
 
 
 @NgModule({
     imports: [BrowserModule, HttpModule, FormsModule,
               RouterModule.forRoot([{ path: 'CreatePayment', component: PaymentFormComponent },
                 { path: 'ListPayment', component: PaymentListComponent },
+                { path: 'Transfer', component: TransferInternal },
                 { path: '', component: PaymentFormComponent }], { useHash: true })],  
-	declarations: [AppComponent, PaymentFormComponent, PaymentListComponent],
+	declarations: [AppComponent, PaymentFormComponent, PaymentListComponent, TransferInternal],
 	bootstrap: [AppComponent ],
     providers: [{ provide: PaymentLogic, useClass: CreatePaymentLogic },
                 { provide: ListPaymentLogic, useClass: ListLogic },
