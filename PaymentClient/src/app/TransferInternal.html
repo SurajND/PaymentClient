@@ -1,8 +1,17 @@
 <div *ngIf ="!Show">
-    <h1>Account List</h1>
-    <form>        
-        <input type="button" value="Pop Up" (click)="Distrue()">
-    </form>
+    <h1>Account List</h1>    
+</div>
+<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)" >
+    <h2>Account 3361632362</h2>    
+</div>
+<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)">
+    <h2>Account 3258186214</h2>    
+</div>
+<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)" >
+    <h2>Account 3258050347</h2>    
+</div>
+<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)">
+    <h2>Account 3191000331</h2>    
 </div>
 <!-- The Modal -->
 <div *ngIf="dis" id="myModal" class="modal">
