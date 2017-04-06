@@ -20,7 +20,6 @@ export class PaymentFormComponent {
 	benDd:boolean = false;
 	code : boolean = false;
 	pay : PayForm;
-	dis:boolean = false;
 
 	constructor(private PayLogic: PaymentLogic) {
 		this.pay = new PayForm();
@@ -60,14 +59,6 @@ export class PaymentFormComponent {
 
 	CreateMore(): void {
 		this.Show = false;
-	}
-
-	Distrue(): void {		
-		  this.dis = true;
-	}
-
-	Disfalse(): void {		
-		  this.dis = false;
 	}
 
 	BenType(ptype : string):void{

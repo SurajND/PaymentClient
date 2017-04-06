@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { PaymentFormComponent } from './paymentform.component';
-import {PaymentListComponent} from './paymentlist.component';
+import { PaymentListComponent} from './paymentlist.component';
 import { AppComponent } from './app.component';
 import { CreatePaymentLogic, PaymentLogic } from './sendpayment';
 import { Req } from './request';
@@ -13,7 +13,7 @@ import { ListPaymentResponse, Payments } from './listresponse';
 import { ListLogic, ListPaymentLogic } from './listpayment';
 import { ListPaymentRequest } from './listrequest';
 import { ApprovePayLogic, ApprovePayment} from './Approve.service';
-import { TransferInternal } from './TransferInternal';
+import { TransferInternal, Account } from './TransferInternal';
 
 
 @NgModule({

@@ -51,8 +51,7 @@
             <input type="text" style="padding-left:2px" placeholder="Creditor or giro account number" name="ibkreditor" value="" [(ngModel)]="pay.ibkreditor"/>
             <input type="text" style="padding-left:2px" placeholder="Message to beneficiary" name="modtagtext" value="" [(ngModel)]="pay.modtagtext"/>
         </div>    
-        <input type="button" value="Create Payment" (click)="CreateP(u.value,a.value,f.value,b.value,p.value)">
-        <input type="button" value="Pop Up" (click)="Distrue()">
+        <input type="button" value="Create Payment" (click)="CreateP(u.value,a.value,f.value,b.value,p.value)">        
     </form>
 </div>
 <div *ngIf="Show">

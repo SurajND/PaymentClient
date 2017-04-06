@@ -1,18 +1,75 @@
 <div *ngIf ="!Show">
     <h1>Account List</h1>    
 </div>
-<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)" >
-    <h2>Account 3361632362</h2>    
+<table border="1">
+    <tr selecttable="blue" style="cursor:pointer">
+        <th>Account</th>
+        <th>Country</th>
+        <th>Currency</th>
+    </tr>
+    <tr *ngFor="let x of accounts" style="cursor:pointer">
+        <td>
+            <div (ondragstart)="drag($event)"  draggable="true" (drop)="Distrue($event)" (ondragover)="prevent($event)" >
+                {{x.fromAccount}}
+            </div>
+        </td>
+        <td>
+            {{x.country}}
+        </td>
+        <td>
+            {{x.currency}}
+        </td>
+    </tr>    
+</table>
+
+<div>
+    <table border="1">
+
+        <tr selecttable="blue" style="cursor:pointer">
+            <th> </th>
+            <th> Amount </th>
+            <th> Currency </th>
+            <th> Date </th>
+            <th> Debitor Account Name </th>
+            <th> Creditor Name </th>
+            <th> To Account </th>
+            <th> Reference Number </th>
+            <th> Status </th>
+
+        </tr>
+        <tr *ngFor="let x of paymentresult"  style="cursor:pointer">
+            <td>
+                <input #{{x.txhRfnrar}} type="checkbox" [(ngModel)]="x.selected" name="your-group" value="unit-in-group" />
+            </td>
+            <td>
+                {{x.txoAmount}}
+            </td>
+            <td>
+                {{x.txoCurrency}}
+            </td>
+            <td>
+                {{x.txoEkspDt}}
+            </td>
+            <td>
+                {{x.txoAfsKto}}
+            </td>
+            <td>
+                {{x.txoTilNvn}}
+            </td>
+            <td>
+                {{x.txoTilKto}}
+            </td>
+            <td>
+                {{x.txhRfnrar}}
+            </td>            
+            <td>
+                {{x.txoBTST}}
+            </td>
+            
+        </tr>
+    </table>    
 </div>
-<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)">
-    <h2>Account 3258186214</h2>    
-</div>
-<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)" >
-    <h2>Account 3258050347</h2>    
-</div>
-<div draggable="true" (drop)="Distrue()" (ondragover)="prevent($event)">
-    <h2>Account 3191000331</h2>    
-</div>
+
 <!-- The Modal -->
 <div *ngIf="dis" id="myModal" class="modal">
   <!-- Modal content -->
@@ -20,6 +77,6 @@
     <span class="close" (click)="Disfalse()">&times;</span>
     <label for="type">Enter the amount</label>
     <input type="text" style="padding-left:2px" name="amountTransfer" value="" #amo/>
-    <input type="button" value="Transfer" (click)="Disfalse()">
+    <input type="button" value="Transfer" (click)="Transfer(amo.value)">
   </div>
 </div>
