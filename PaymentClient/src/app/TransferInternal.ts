@@ -76,7 +76,7 @@ export class TransferInternal {
             '0');
         this.LisLogic.List(r).subscribe((r) => {
             this.result = r;
-            this.paymentresult = this.result.payments.paymentrow.slice(0,5);
+            this.paymentresult = this.result.payments.paymentrow.reverse().slice(0,5);
             console.log(this.result);
         }, error => this.error = <any>error);
     }
