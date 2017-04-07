@@ -37,7 +37,8 @@ export class CreatePaymentLogic extends PaymentLogic {
 	}	
 
 	SalaryCreate(Pay: SalaryPayment): Observable<Res> {
-        let url = "http://localhost:63977/api/AccountTransfer";
+        let url = "http://Y34897:8080/payment/payment/create";
+		//http://Y34897:8080/payment/payment/create
 		let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 		let options = new RequestOptions({ headers: headers }); // Create a request option
 		return this._http
