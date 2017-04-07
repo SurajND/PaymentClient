@@ -15,10 +15,10 @@ import { ListPaymentRequest } from './listrequest';
 import { ApprovePayLogic, ApprovePayment} from './Approve.service';
 import { TransferInternal, Account } from './TransferInternal';
 
-
 @NgModule({
-    imports: [BrowserModule, HttpModule, FormsModule,
-              RouterModule.forRoot([{ path: 'CreatePayment', component: PaymentFormComponent },
+    imports: [BrowserModule, HttpModule, FormsModule, 
+              RouterModule.forRoot([
+                { path: 'CreatePayment', component: PaymentFormComponent },
                 { path: 'ListPayment', component: PaymentListComponent },
                 { path: 'Transfer', component: TransferInternal },
                 { path: '', component: PaymentFormComponent }], { useHash: true })],  

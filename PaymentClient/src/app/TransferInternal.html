@@ -1,27 +1,28 @@
 <div *ngIf ="!Show">
     <h1>Account List</h1>    
 </div>
-<table border="1">
-    <tr selecttable="blue" style="cursor:pointer">
-        <th>Account</th>
-        <th>Country</th>
-        <th>Currency</th>
-    </tr>
-    <tr *ngFor="let x of accounts" style="cursor:pointer">
-        <td>
-            <div (ondragstart)="drag($event)"  draggable="true" (drop)="Distrue($event)" (ondragover)="prevent($event)" >
-                {{x.fromAccount}}
-            </div>
-        </td>
-        <td>
-            {{x.country}}
-        </td>
-        <td>
-            {{x.currency}}
-        </td>
-    </tr>    
-</table>
-
+<div>
+    <table border="1">
+        <tr selecttable="blue" style="cursor:pointer">
+            <th>Account</th>
+            <th>Country</th>
+            <th>Currency</th>
+        </tr>
+        <tr *ngFor="let x of accounts" style="cursor:pointer">
+            <td>
+                <div (ondragstart)="drag($event)"  draggable="true" (drop)="Distrue($event)" (ondragover)="prevent($event)" >
+                    {{x.fromAccount}}
+                </div>
+            </td>
+            <td>
+                {{x.country}}
+            </td>
+            <td>
+                {{x.currency}}
+            </td>
+        </tr>    
+    </table>
+</div>
 <div>
     <table border="1">
 

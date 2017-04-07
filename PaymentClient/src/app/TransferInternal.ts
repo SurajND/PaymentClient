@@ -7,6 +7,7 @@ import { PayForm } from "./PayForm";
 import { PaymentLogic } from "./sendpayment";
 import { Res } from "./response";
 
+
 @Component({
 
     moduleId: module.id,
@@ -51,8 +52,8 @@ export class TransferInternal {
             '7DAG',
             'Q',
             'MANGLG    ',
-            '20170406',
-            '20170406',
+            '20170407',
+            '20170407',
             ' ',
             ' ',
             '00000000000000',
