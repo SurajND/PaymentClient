@@ -4,6 +4,7 @@ import { Res } from './response';
 import { CreatePaymentLogic,PaymentLogic } from './sendpayment';
 import { SalaryPayment } from './SalaryPayment';
 import { PayForm } from './PayForm';
+import { PaymentReq } from './Models/PaymentReq';
 
 @Component({
 
@@ -42,16 +43,16 @@ export class PaymentFormComponent {
 			else{
 				btty = "Salary";
 				this.pay.btype = "";
-			}			
-			let d: SalaryPayment = new SalaryPayment('',agrno, uid, 'DA','DK' ,'E','DK','DA',
-			'3923','','0', faccount, '0','','', '','','','','','0000', faccount,'',this.pay.toaccount,'',
-			this.pad(amount.replace(",",""),15), 'DKK','','0','DABA', 'O23YVQD5IKDJK26L3443FJO5',
-			ptype,'0','0','0','0','1','0','0',btty,'0','0','0','0',this.pay.btype,this.pay.kortart,
-			this.pay.ikdent,this.pay.ibkreditor,afsname,address,postnr,byname,afslandkode,
-			this.pay.modtagtext,krednr,rfnrar);
-			this.PayLogic.SalaryCreate(d).subscribe((r) => {
+			}	
+			let d : PaymentReq = new PaymentReq(agrno,uid,faccount,faccount,
+			this.pay.toaccount,this.pad(amount.replace(",",""),15),
+			'O23YVQD5IKDJK26L3443FJO5',ptype,btty,
+			this.pay.btype,this.pay.kortart,
+			this.pay.ikdent,this.pay.ibkreditor,afsname,address,postnr,byname,this.pay.modtagtext,krednr);	
+
+			this.PayLogic.MakePayment(d).subscribe((r) => {
 				this.out = r;
-				this.result = this.out.Returtekst;
+				this.result = "Payment has been made with reference number : " + this.out.returtekst;
 				this.Show = true;
 				console.log(this.result); 
 			}, error => this.error = <any>error);		

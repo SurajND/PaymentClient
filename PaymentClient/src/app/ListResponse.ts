@@ -10,7 +10,7 @@
 }
 
 export class Payments {
-    constructor(public paymentrow: Payment[]) { }
+    constructor(public paymentRow: Payment[]) { }
 }
 
 export class Payment {

@@ -1,10 +1,12 @@
 ﻿import { Component, EventEmitter, Output } from '@angular/core';
 import { ListPaymentRequest } from './listrequest';
-import { ListPaymentResponse, Payment, Payments } from './listresponse';
+import { ListPaymentRes, Payment, Payments } from './Models/ListPaymentResponse';
 import { ListLogic, ListPaymentLogic } from './listpayment';
 import { ApprovePayment} from './Approve.service';
-import { ApproveRequesst,ApprovePaymentList, PaymentRow} from './ApproveReq';
+//import { ApproveRequest,ApprovePaymentList, PaymentRow} from './ApproveReq';
 import { ApproveResponse } from './ApproveRes';
+import { ApproveReq,ApprovePaymentList,PaymentRow } from './Models/ApproveReq';
+import { ListPaymentReq } from './Models/ListPaymentRequest';
 
 @Component({
 
@@ -14,7 +16,7 @@ import { ApproveResponse } from './ApproveRes';
 })
 
 export class PaymentListComponent {
-    result: ListPaymentResponse;
+    result: ListPaymentRes;
     res : ApproveResponse;
     paymentresult: Payment[];
     error: string;
@@ -29,58 +31,23 @@ export class PaymentListComponent {
     }
 
     ListP(uid: string, agrno: string, ptype: string, fdate: string, tdate: string ): void {
-
-        //const [first, second, third] = fdate.toString().split("-");
-        //fdate = first + second + third;
-        //const [first1, second1, third1] = tdate.toString().split("-");
-        //tdate = first1 + second1 + third1;
         console.log(fdate);
+        fdate = fdate.replace("-","");        
+        tdate = tdate.replace("-","");
+        fdate = fdate.replace("-","");
+        tdate = tdate.replace("-","");
         this.Alert = false;
-        let r: ListPaymentRequest = 
-        new ListPaymentRequest('000000000000000000000000',
-            uid,
-            agrno,
-            'N',
-            'DK',
-            'EN',
-            ' ',
-            ' ',
-            ' ',
-            '7DAG',
-            'Q',
-            'MANGLG    ',
-            fdate,
-            tdate,
-            ' ',
-            ' ',
-            '00000000000000',
-            '0',
-            0,
-            0,
-            0,
-            0,
-            'DKK',
-            uid,
-            ' ',
-            ' ',
-            ' ',
-            '00000000000000000000000000000000000000000000000000',
-            ' ',
-            ptype,
-            ' ',
-            'BET',
-            ' ',
-            '0',
-            '0');
-        this.LisLogic.List(r).subscribe((r) => {
+        let r: ListPaymentReq = new ListPaymentReq('000000000000000000000000',uid,agrno,
+        fdate,tdate);
+
+        this.LisLogic.ListPayment(r).subscribe((r) => {
             this.result = r;
-            this.paymentresult = this.result.payments.paymentrow;
+            this.paymentresult = this.result.payments.paymentRow.reverse().slice(0,8);
             console.log(this.result);
             
                 this.Show = true;
             
         }, error => this.error = <any>error);
-
         
     }
 
@@ -90,88 +57,47 @@ export class PaymentListComponent {
         return s;
     }
 
-    Approve(fdate: string, tdate: string) {
-        //this.Alert = true;
+    Approve(fdate: string, tdate: string) {       
         let i : number = 0;
-        let req : ApproveRequesst = new ApproveRequesst();
-        req.payments = new ApprovePaymentList();
-        req.payments.paymentRow = new Array<PaymentRow>();
-        req.AFTLNR = '0F2714';
-        req.BRGNR = '5G7283';
-        req.BULKREFC = '';
-        req.INTEKSTBRUGER = 'E';
-        req.KT_DROPDOWN_SPECIEL = '';
-        req.LANDEKODE = 'DK';
-        req.LDKD_BRUGER = 'DK';
-        req.RATECNTROLTIMESTAMP = '';
-        req.RATEEXPIRYTIMESTAMP = '';
-        req.SPKD_BRUGER = 'DA';
-        req.SPROG = 'EN';
-        req.TZID_BRUGER = '3923';
+        let req : ApproveReq = new ApproveReq();
+        req.Payments = new ApprovePaymentList();
+        req.Payments.PaymentRow = new Array<PaymentRow>();
+        req.AgreementNumber = '0F2714';
+        req.UserID = '5G7283';        
 
         this.paymentresult.forEach(pay => {
             if(pay.selected == true)
             {                
                 let pr : PaymentRow = new PaymentRow();
-                pr.RFNRAR = pay.txhRfnrar.substr(3,10);
-                pr.AntalDec = 2;                
-                pr.BELOEB = this.pad(pay.txoAmount.replace(",",""),15);                
-                //pr.BELOEB = "000000000000" + pay.txoAmount.replace(",","");
-                pr.BTTY = pay.paymentTypeValue.replace(" ","");
-                pr.LAESTIMESTAMP = pay.txhOprettid;
-                pr.TILIDENT = pay.txoTilKto.replace(" ","").trim();
-                pr.VALUTAKODE = pay.txoCurrency;
-                req.payments.paymentRow.push(pr);
+                pr.ReferenceNumber = pay.referenceNumber.substr(3,10);
+                pr.NumberOfDecimals = 2;                
+                pr.Amount = this.pad(pay.amount.replace(",",""),15);           
+                pr.PaymentType = pay.paymentTypeValue.replace(" ","");
+                pr.TimeStamp = pay.creationId;
+                pr.InternalReference = pay.toAccount.replace(" ","").trim();
+                pr.Currency = pay.currency;
+                req.Payments.PaymentRow.push(pr);
                 i = i + 1;
             }
         });
 
         console.log(req);
-        this.appPay.Approve(req)
+        this.appPay.ApprovePayment(req)
         .subscribe(can => {      
          console.log(this.res);
         },error => this.error = <any>error);
 
         //start
-        let r: ListPaymentRequest = 
-        new ListPaymentRequest('000000000000000000000000',
-            '5G7283',
-            '0F2714',
-            'N',
-            'DK',
-            'EN',
-            ' ',
-            ' ',
-            ' ',
-            '7DAG',
-            'Q',
-            'MANGLG    ',
-            fdate,
-            tdate,
-            ' ',
-            ' ',
-            '00000000000000',
-            '0',
-            0,
-            0,
-            0,
-            0,
-            'DKK',
-            '5G7283',
-            ' ',
-            ' ',
-            ' ',
-            '00000000000000000000000000000000000000000000000000',
-            ' ',
-            'ALL',
-            ' ',
-            'BET',
-            ' ',
-            '0',
-            '0');
-        this.LisLogic.List(r).subscribe((r) => {
+        fdate = fdate.replace("-","");        
+        tdate = tdate.replace("-","");
+        fdate = fdate.replace("-","");
+        tdate = tdate.replace("-","");
+        let r: ListPaymentReq = new ListPaymentReq('000000000000000000000000','5G7283','0F2714',
+        fdate,tdate);
+        
+        this.LisLogic.ListPayment(r).subscribe((r) => {
             this.result = r;
-            this.paymentresult = this.result.payments.paymentrow;
+            this.paymentresult = this.result.payments.paymentRow.reverse().slice(0,8);
             console.log(this.result);
             
                 this.Show = true;

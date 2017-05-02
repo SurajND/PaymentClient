@@ -44,31 +44,31 @@
         </tr>
         <tr *ngFor="let x of paymentresult"  style="cursor:pointer">
             <td>
-                <input #{{x.txhRfnrar}} type="checkbox" [(ngModel)]="x.selected" name="your-group" value="unit-in-group" />
+                <input #{{x.referenceNumber}} type="checkbox" [(ngModel)]="x.selected" name="your-group" value="unit-in-group" />
             </td>
             <td>
-                {{x.txoAmount}}
+                {{x.amount}}
             </td>
             <td>
-                {{x.txoCurrency}}
+                {{x.currency}}
             </td>
             <td>
-                {{x.txoEkspDt}}
+                {{x.approvalDate}}
             </td>
             <td>
-                {{x.txoAfsKto}}
+                {{x.beneficiaryName}}
             </td>
             <td>
-                {{x.txoTilNvn}}
+                {{x.creditorName}}
             </td>
             <td>
-                {{x.txoTilKto}}
+                {{x.toAccount}}
             </td>
             <td>
-                {{x.txhRfnrar}}
+                {{x.referenceNumber}}
             </td>            
             <td>
-                {{x.txoBTST}}
+                {{x.tBTST}}
             </td>
             
         </tr>

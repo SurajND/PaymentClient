@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Output, HostListener } from '@angular/core';
+import { Component, EventEmitter, Output, HostListener, Attribute } from '@angular/core';
 import { ListPaymentRequest } from './listrequest';
-import { ListPaymentResponse, Payment, Payments } from './listresponse';
+import { ListPaymentRes, Payment, Payments } from './Models/ListPaymentResponse';
 import { ListLogic, ListPaymentLogic } from './listpayment';
 import { SalaryPayment } from "./SalaryPayment";
 import { PayForm } from "./PayForm";
 import { PaymentLogic } from "./sendpayment";
 import { Res } from "./response";
-
+import { ListPaymentReq } from './Models/ListPaymentRequest';
+import { PaymentReq } from './Models/PaymentReq';
 
 @Component({
 
@@ -17,7 +18,7 @@ import { Res } from "./response";
 
 export class TransferInternal {
     dis:boolean = false;
-    result: ListPaymentResponse;
+    result: ListPaymentRes;
     paymentresult: Payment[];
     error: string;
     acc : Account;
@@ -25,7 +26,7 @@ export class TransferInternal {
     out: Res;
     results: string;
     accounts : Account[];
-    
+        
     constructor(public LisLogic: ListPaymentLogic,
     private PayLogic: PaymentLogic){
         this.accounts = new Array<Account>(
@@ -38,46 +39,20 @@ export class TransferInternal {
         this.pay = new PayForm();        
     }
 
-    ListPayment(){
-        let r: ListPaymentRequest = 
-        new ListPaymentRequest('000000000000000000000000',
-            '5G7283',
-            '0F2714',
-            'N',
-            'DK',
-            'EN',
-            ' ',
-            ' ',
-            ' ',
-            '7DAG',
-            'Q',
-            'MANGLG    ',
-            '20170407',
-            '20170407',
-            ' ',
-            ' ',
-            '00000000000000',
-            '0',
-            0,
-            0,
-            0,
-            0,
-            'DKK',
-            '5G7283',
-            ' ',
-            ' ',
-            ' ',
-            '00000000000000000000000000000000000000000000000000',
-            ' ',
-            'ALL',
-            ' ',
-            'BET',
-            ' ',
-            '0',
-            '0');
-        this.LisLogic.List(r).subscribe((r) => {
+    ListPayment(){         
+        let dat = new Date();
+        let y = dat.getFullYear();
+        let m = dat.getMonth() + 1;
+        let d = dat.getDate();
+
+        let date = y.toString() + "0" + m.toString() + "0" + d.toString();
+        
+        let r: ListPaymentReq = new ListPaymentReq('000000000000000000000000',
+        '5G7283','0F2714', date,date);
+        
+        this.LisLogic.ListPayment(r).subscribe((r) => {
             this.result = r;
-            this.paymentresult = this.result.payments.paymentrow.reverse().slice(0,5);
+            this.paymentresult = this.result.payments.paymentRow.reverse().slice(0,5);
             console.log(this.result);
         }, error => this.error = <any>error);
     }
@@ -139,16 +114,16 @@ export class TransferInternal {
 			else{
 				btty = "Salary";
 				this.pay.btype = "";
-			}			
-			let d: SalaryPayment = new SalaryPayment('',agrno, uid, 'DA','DK' ,'E','DK','DA',
-			'3923','','0', faccount, '0','','', '','','','','','0000', faccount,'',taccount,'',
-			this.pad(amount.replace(",",""),15), 'DKK','','0','DABA', 'O23YVQD5IKDJK26L3443FJO5',
-			ptype,'0','0','0','0','1','0','0',btty,'0','0','0','0',"ACC","",
-			"","",afsname,address,postnr,byname,afslandkode,
-			"",krednr,rfnrar);
-			this.PayLogic.SalaryCreate(d).subscribe((r) => {
+			}
+            let d : PaymentReq = new PaymentReq(agrno,uid,faccount,faccount,
+			taccount,this.pad(amount.replace(",",""),15),
+			'O23YVQD5IKDJK26L3443FJO5',ptype,btty,
+			"ACC","",
+			"","",afsname,address,postnr,byname,"",krednr);
+
+			this.PayLogic.MakePayment(d).subscribe((r) => {
 				this.out = r;
-				this.results = this.out.Returtekst;
+				this.results = this.out.returtekst;
                 this.ListPayment();
 				console.log(this.result); 
 			}, error => this.error = <any>error);		

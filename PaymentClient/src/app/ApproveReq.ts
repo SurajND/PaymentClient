@@ -1,4 +1,4 @@
-export class ApproveRequesst
+export class ApproveRequest
     {
         AFTLNR : string;
         BRGNR : string;
@@ -12,12 +12,12 @@ export class ApproveRequesst
         KT_DROPDOWN_SPECIEL : string;
         RATEEXPIRYTIMESTAMP : string;
         RATECNTROLTIMESTAMP : string;
-        payments : ApprovePaymentList;
+        Payments : ApprovePaymentList;
     }
 
     export class ApprovePaymentList
     {
-        public paymentRow : Array<PaymentRow>;
+        public PaymentRow : Array<PaymentRow>;
     }
 
     export class PaymentRow
